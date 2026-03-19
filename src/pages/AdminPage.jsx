@@ -553,7 +553,7 @@ export default function AdminPage() {
     setIsExporting(true);
     try {
       const { data, error } = await supabase
-        .from('check_ins')
+        .from('checkins')
         .select(`
           *,
           employees (
