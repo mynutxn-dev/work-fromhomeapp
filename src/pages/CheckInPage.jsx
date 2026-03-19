@@ -55,6 +55,10 @@ export default function CheckInPage() {
 
   const handleCheckIn = async (verifiedBy = 'pin') => {
     setIsCheckingIn(true);
+    
+    // Allow UI to paint the loading state before geolocation starts
+    await new Promise(resolve => setTimeout(resolve, 50));
+    
     let lat = null;
     let lng = null;
 

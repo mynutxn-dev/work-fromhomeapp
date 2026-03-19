@@ -64,30 +64,34 @@ export default function DashboardPage() {
     setIsLocating(true);
     setLocationError('');
 
-    const performCheckIn = (lat = null, lng = null) => {
-      checkIn(selectedType, note || 'ทำงานปกติ', 'pin', null, lat, lng);
-      setNote('');
-      setIsLocating(false);
-    };
+    // Use setTimeout to allow the browser to paint the "loading" state before blocking
+    // the main thread with geolocation initialization, fixing the INP issue.
+    setTimeout(() => {
+      const performCheckIn = (lat = null, lng = null) => {
+        checkIn(selectedType, note || 'ทำงานปกติ', 'pin', null, lat, lng);
+        setNote('');
+        setIsLocating(false);
+      };
 
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          performCheckIn(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          console.error('Error fetching location:', error);
-          let errorMsg = 'ไม่สามารถดึงตำแหน่งได้';
-          if (error.code === 1) errorMsg = 'กรุณาอนุญาตการเข้าถึงตำแหน่ง';
-          setLocationError(errorMsg);
-          // Still allow check-in but without GPS
-          performCheckIn();
-        },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-      );
-    } else {
-      performCheckIn();
-    }
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            performCheckIn(position.coords.latitude, position.coords.longitude);
+          },
+          (error) => {
+            console.error('Error fetching location:', error);
+            let errorMsg = 'ไม่สามารถดึงตำแหน่งได้';
+            if (error.code === 1) errorMsg = 'กรุณาอนุญาตการเข้าถึงตำแหน่ง';
+            setLocationError(errorMsg);
+            // Still allow check-in but without GPS
+            performCheckIn();
+          },
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+      } else {
+        performCheckIn();
+      }
+    }, 50);
   };
 
   const statusLabels = { wfh: 'Work From Home', office: 'ออฟฟิศ', leave: 'ลา' };
