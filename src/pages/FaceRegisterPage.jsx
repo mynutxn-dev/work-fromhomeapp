@@ -98,7 +98,7 @@ export default function FaceRegisterPage() {
         </div>
       )}
 
-      <div className="admin-table-container ios-widget" style={{ padding: 0, overflow: 'hidden' }}>
+      <div className="admin-table-container ios-widget" style={{ padding: 0, overflowX: 'auto' }}>
         <table className="admin-table">
           <thead>
             <tr>
