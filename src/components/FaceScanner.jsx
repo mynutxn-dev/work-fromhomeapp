@@ -63,8 +63,11 @@ export default function FaceScanner({ mode = 'login', onSuccess, onCancel }) {
     setMessage('กำลังสแกนหน้า...');
 
     try {
+      // Small delay to allow UI to update to 'scanning' state
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       const detection = await faceapi
-        .detectSingleFace(videoRef.current)
+        .detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions({ inputSize: 224, scoreThreshold: 0.5 }))
         .withFaceLandmarks()
         .withFaceDescriptor();
 
