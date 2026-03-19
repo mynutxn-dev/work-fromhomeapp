@@ -718,7 +718,7 @@ export default function AdminPage() {
             </button>
           </div>
 
-          <div className="admin-table-container ios-widget" style={{ padding: 0, overflow: 'hidden' }}>
+          <div className="admin-table-container ios-widget" style={{ padding: 0, overflowX: 'auto' }}>
             <table className="admin-table">
               <thead>
                 <tr>
@@ -819,7 +819,7 @@ export default function AdminPage() {
               </button>
             </div>
 
-            <div className="admin-table-container ios-widget" style={{ padding: 0, overflow: 'hidden', marginBottom: 24 }}>
+            <div className="admin-table-container ios-widget" style={{ padding: 0, overflowX: 'auto', marginBottom: 24 }}>
               <table className="admin-table">
                 <thead>
                   <tr>
@@ -885,7 +885,7 @@ export default function AdminPage() {
             </button>
           </div>
 
-          <div className="admin-table-container ios-widget" style={{ padding: 0, overflow: 'hidden' }}>
+          <div className="admin-table-container ios-widget" style={{ padding: 0, overflowX: 'auto' }}>
             <table className="admin-table">
               <thead>
                 <tr>
