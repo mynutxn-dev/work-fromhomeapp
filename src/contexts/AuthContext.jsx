@@ -155,6 +155,35 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('wfh_currentUser');
   };
 
+  // Auto-logout on idle (30 minutes)
+  useEffect(() => {
+    if (!currentUser) return;
+
+    let lastActivity = Date.now();
+    let intervalId;
+
+    const updateActivity = () => {
+      lastActivity = Date.now();
+    };
+
+    const events = ['mousemove', 'keydown', 'wheel', 'touchstart'];
+    events.forEach(event => window.addEventListener(event, updateActivity, { passive: true }));
+
+    intervalId = setInterval(() => {
+      // 30 minutes = 30 * 60 * 1000 ms
+      if (Date.now() - lastActivity > 30 * 60 * 1000) {
+        logout();
+        // Force reload to ensure all states are cleared and redirected properly
+        window.location.href = '/login'; 
+      }
+    }, 60 * 1000); // Check every minute
+
+    return () => {
+      events.forEach(event => window.removeEventListener(event, updateActivity));
+      clearInterval(intervalId);
+    };
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
       value={{ currentUser, branches, departments, login, loginByFace, register, logout, loading, loadBranches, loadDepartments, refreshCurrentUser }}
