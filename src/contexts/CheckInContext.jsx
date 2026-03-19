@@ -57,7 +57,7 @@ export function CheckInProvider({ children }) {
         const { data } = await supabase
           .from('checkins')
           .update({
-            check_in_time: now,
+
             status,
             note,
             verified_by: verifiedBy,
