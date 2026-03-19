@@ -110,6 +110,7 @@ export default function AdminPage() {
       branch_id: employee.branch_id || employee.departments?.branch_id || '',
       department_id: employee.department_id || '',
       role: employee.role || 'employee',
+      new_pin_code: '',
     });
     setShowEmployeeModal(true);
   };
@@ -281,14 +282,27 @@ export default function AdminPage() {
         return;
       }
 
+      const updateData = { 
+        employee_code: employeeCode, 
+        branch_id: branchId, 
+        department_id: departmentId,
+        role: employeeForm.role
+      };
+
+      if (employeeForm.new_pin_code && employeeForm.new_pin_code.trim()) {
+        const newPin = employeeForm.new_pin_code.trim();
+        if (newPin.length < 4) {
+          alert('PIN ใหม่ต้องมีอย่างน้อย 4 หลัก');
+          setIsSavingEmployee(false);
+          return;
+        }
+        const salt = bcrypt.genSaltSync(10);
+        updateData.pin_code = bcrypt.hashSync(newPin, salt);
+      }
+
       const { error } = await supabase
         .from('employees')
-        .update({ 
-          employee_code: employeeCode, 
-          branch_id: branchId, 
-          department_id: departmentId,
-          role: employeeForm.role
-        })
+        .update(updateData)
         .eq('id', editingEmployee.id);
 
       if (error) {
@@ -1039,6 +1053,24 @@ export default function AdminPage() {
                   </div>
                 )}
               </div>
+              
+              <div className="form-group" style={{ marginTop: 20 }}>
+                <label style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 8, display: 'block' }}>รีเซ็ตรหัส PIN ใหม่ (ตัวเลข 4-6 หลัก)</label>
+                <input
+                  type="password"
+                  className="form-input"
+                  value={employeeForm.new_pin_code || ''}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    if (val.length <= 6) {
+                      setEmployeeForm((prev) => ({ ...prev, new_pin_code: val }));
+                    }
+                  }}
+                  placeholder="เว้นว่างไว้ถ้าไม่ต้องการเปลี่ยน"
+                />
+                <span style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4, display: 'block' }}>* ข้ามช่องนี้ไปหากไม่ต้องการแก้รหัสผ่านให้พนักงาน</span>
+              </div>
+
               <div className="form-group" style={{ marginTop: 20 }}>
                 <label style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 8, display: 'block' }}>สิทธิ์การใช้งาน</label>
                 <div style={{ display: 'flex', gap: 16 }}>
