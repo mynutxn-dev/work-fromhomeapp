@@ -426,3 +426,157 @@ strong, b {
 .legend-dot.wfh { background: var(--primary); }
 .legend-dot.office { background: var(--success); }
 .legend-dot.leave { background: var(--warning); }
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+/* Small screens (phones) */
+@media (max-width: 767px) {
+  body {
+    font-size: 14px;
+  }
+
+  /* Layout */
+  .main-content {
+    padding: 68px 12px 24px;
+  }
+
+  /* Navbar */
+  .apple-navbar { height: 50px; }
+  .apple-navbar-container { padding: 0 12px; }
+  .apple-navbar-brand { font-size: 15px; gap: 6px; }
+  .apple-navbar-brand img { width: 28px; height: 28px; }
+  .apple-navbar-links { display: none; }
+  .apple-navbar-actions { gap: 8px; }
+  .apple-nav-user { width: 28px; height: 28px; font-size: 12px; }
+  .apple-nav-logout { font-size: 12px; gap: 4px; }
+  .apple-mobile-menu { top: 50px; padding: 8px 12px 16px; }
+
+  /* Dashboard */
+  .apple-dashboard-container { padding-bottom: 24px; }
+  .dashboard-header { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 4px; 
+    margin-bottom: 20px; 
+    padding: 0; 
+  }
+  .greeting-text h1 { font-size: 24px; }
+  .greeting-text p { font-size: 13px; }
+  .current-time { display: none; }
+
+  /* Stats Widgets */
+  .dashboard-stats { gap: 8px; margin-bottom: 16px; }
+  .ios-widget { 
+    padding: 14px; 
+    border-radius: 16px; 
+  }
+  .ios-widget:hover { transform: none; }
+  .widget-icon { margin-bottom: 8px; }
+  .widget-icon svg { width: 18px; height: 18px; }
+  .widget-value { font-size: 24px; margin-bottom: 4px; }
+  .widget-label { font-size: 10px; }
+
+  /* Main Grid */
+  .dashboard-main-grid { gap: 12px; }
+  .widget-header { margin-bottom: 16px; }
+  .widget-header h3 { font-size: 16px; }
+
+  /* Check-in */
+  .checkin-hero { margin-bottom: 20px; padding: 12px 0; }
+  .checkin-title { font-size: 18px; }
+  .checkin-subtitle { font-size: 13px; }
+  .checkin-type-selector { gap: 6px; }
+  .checkin-type-btn { padding: 10px 8px; font-size: 13px; }
+  .checkin-card { padding: 24px 16px; }
+  .checkin-status-indicator { width: 72px; height: 72px; font-size: 32px; margin-bottom: 16px; }
+  .checkin-time-info { gap: 24px; margin-top: 20px; padding-top: 20px; }
+  .checkin-time-info .value { font-size: 20px; }
+
+  /* Activity List */
+  .clean-activity-list { gap: 10px; }
+  .clean-activity-item { padding: 10px; gap: 10px; }
+  .activity-icon-wrap { width: 34px; height: 34px; border-radius: 10px; }
+  .activity-icon-wrap svg { width: 14px; height: 14px; }
+  .activity-title { font-size: 13px; }
+  .activity-time-str { font-size: 11px; }
+
+  /* Page Headers */
+  .page-header { margin-bottom: 24px; }
+  .page-header h1 { font-size: 24px; }
+  .page-header p { font-size: 14px; }
+
+  /* Login */
+  .login-page { padding: 12px; }
+  .login-card { padding: 28px 20px; }
+  .login-icon { width: 52px; height: 52px; border-radius: 14px; margin-bottom: 16px; }
+  .login-header h1 { font-size: 22px; }
+  .login-header p { font-size: 13px; margin-bottom: 24px; }
+
+  /* Forms */
+  .form-group { margin-bottom: 14px; }
+  .form-group label { font-size: 13px; margin-bottom: 6px; }
+  .form-input, .form-select { 
+    padding: 12px 14px; 
+    font-size: 15px; 
+    border-radius: var(--radius-sm); 
+  }
+
+  /* Buttons */
+  .btn { padding: 12px 20px; font-size: 14px; }
+  .btn-lg { padding: 14px 24px; font-size: 15px; }
+  .btn-sm { padding: 8px 12px; font-size: 13px; }
+
+  /* Admin Controls */
+  .admin-controls.ios-widget {
+    padding: 12px !important;
+    gap: 8px !important;
+    border-radius: 16px;
+  }
+
+  /* Admin Table */
+  .admin-table-container { border-radius: 16px; }
+  .admin-table { min-width: 900px; }
+  .admin-table th { padding: 10px 12px; font-size: 11px; }
+  .admin-table td { padding: 10px 12px; font-size: 12px; }
+  .admin-user-cell { gap: 8px; }
+  .admin-user-avatar { width: 28px; height: 28px; font-size: 12px; }
+  .admin-status-badge { padding: 4px 8px; font-size: 11px; gap: 4px; }
+
+  /* Calendar */
+  .calendar-container { padding: 16px; border-radius: 16px; }
+  .calendar-header { margin-bottom: 16px; font-size: 16px; }
+  .calendar-nav button { width: 32px; height: 32px; }
+  .calendar-grid { gap: 4px; }
+  .calendar-day { font-size: 13px; border-radius: var(--radius-sm); }
+  .calendar-day-header { font-size: 11px; padding-bottom: 8px; margin-bottom: 4px; }
+  .day-indicator { width: 5px; height: 5px; }
+  .calendar-legend { gap: 12px; margin-top: 20px; padding-top: 16px; font-size: 11px; }
+  .legend-dot { width: 8px; height: 8px; }
+
+  /* Modals */
+  .history-modal-overlay { padding: 8px; align-items: flex-end; }
+  .history-modal { 
+    padding: 24px 16px; 
+    border-radius: 20px 20px 8px 8px; 
+    max-height: 85vh; 
+    max-width: 100%; 
+  }
+  .history-modal-header { margin-bottom: 16px; padding-bottom: 12px; }
+  .history-modal-header h2 { font-size: 18px; }
+
+  /* History */
+  .history-list { gap: 8px; }
+  .history-item { padding: 12px 14px; }
+  .history-group h3 { margin: 20px 0 12px; font-size: 16px; }
+}
+
+/* Extra small screens (small phones) */
+@media (max-width: 374px) {
+  .greeting-text h1 { font-size: 20px; }
+  .widget-value { font-size: 20px; }
+  .widget-label { font-size: 9px; }
+  .ios-widget { padding: 10px; }
+  .checkin-title { font-size: 16px; }
+  .login-card { padding: 20px 14px; }
+  .login-header h1 { font-size: 20px; }
+}
